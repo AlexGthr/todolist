@@ -1,15 +1,24 @@
-// Function pour ajouter une Cards
-function ajoutCards() {
+
+// On récupère ici le bouton addTask pour ajouter une tâche 
+let btnAddTask = document.getElementById("btn")
+
+let count = 1; // On déclare ici le compteur, à 1 de base
+
+// On récupère ici le bouton delete de la div principale (et non du clone) pour pouvoir aussi supprimer cette cards
+let btnDel = document.querySelector('.delBtn')
+
+// Function pour ajouter une Card
+function ajoutCard() {
 
     // On récupère la classe todoCard et on le clone (1)
     let todoCard = document.querySelector(".todoCard")
     let cloneTodoCard = todoCard.cloneNode(true)
 
-    // On récupère le textArea de la cards et on le remet par defaut (2)
+    // On récupère le textArea de la card et on le remet par defaut (2)
     let textAreaCard = cloneTodoCard.querySelector('.task')
     textAreaCard.value = "New task";
 
-    // On récupère la div entière et on lui ajoute le clone de la cards (3)
+    // On récupère la div entière et on lui ajoute le clone de la card (3)
     let boardTodo = document.getElementById("todoCards")
     boardTodo.appendChild(cloneTodoCard)
 
@@ -17,18 +26,18 @@ function ajoutCards() {
 
     compteur() // On utilise la function compteur() pour afficher le nouveau compteur
 
-    // On déclare une variable btnDel qui utilisera la function supprimerCards pour supprimer les CLONES
+    // On déclare une variable btnDel qui utilisera la function supprimerCard pour supprimer un CLONE
     let btnDel = cloneTodoCard.querySelector(".delBtn")
     btnDel.addEventListener("click", function() {
 
-        supprimerCards(cloneTodoCard)
+        supprimerCard(cloneTodoCard)
 
     })
 
 }
 
-// Function pour supprimer une cards
-function supprimerCards(card) {
+// Function pour supprimer une card
+function supprimerCard(card) {
     if (count > 1) {
 
         let boardTodo = document.getElementById("todoCards")
@@ -50,10 +59,10 @@ function compteur() {
 
     if (count > 1) {
 
-        countCard.innerText = "Actuellement : " + count + " tâches";
+        countCard.textContent = "Actuellement : " + count + " tâches";
     } else {
 
-        countCard.innerText = "Actuellement : " + count + " tâche";
+        countCard.textContent = "Actuellement : " + count + " tâche";
     }
 
 }
@@ -68,16 +77,10 @@ function showReaction(type, card) {
     }
 }
 
-// On récupère ici le bouton addTask pour ajouter une tâche 
-let btnAddTask = document.getElementById("btn")
-btnAddTask.addEventListener('click', ajoutCards)
+btnAddTask.addEventListener('click', ajoutCard)
 
-let count = 1; // On déclare ici le compteur, à 1 de base
-
-// On récupère ici le bouton delete de la div principale (et non du clone) pour pouvoir aussi supprimer cette cards
-let btnDel = document.querySelector('.delBtn')
 btnDel.addEventListener('click', function() {
 
-    supprimerCards(document.querySelector(".todoCard"))
+    supprimerCard(document.querySelector(".todoCard"))
 
 })
